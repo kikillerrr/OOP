@@ -10,6 +10,14 @@ void fillArray(int (&arr)[10])
         std::cin >> x;
     }
 }
+
+void printArray(const int (&arr)[10])
+{
+    for (auto x : arr)
+    {
+        std::cout<< x << " ";
+    }
+}
  
 int main()
 {
@@ -19,5 +27,11 @@ int main()
     int arr[10];
 
     fillArray(arr);
+
+    std::cout << "Вот такой массив ";
+    printArray(arr);
+
+
     return 0;
+
 }
