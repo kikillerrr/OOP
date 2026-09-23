@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-#include <utility> 
 
 void fillArray(int (&arr)[10])
 {
@@ -25,6 +24,21 @@ void swapElements(int (&arr)[10], int num1, int num2)
     std::swap(arr[num1], arr[num2]);
 }
  
+
+
+
+
+void multiplyByTwo(int (&arr)[10])
+{
+    for (int& x : arr)
+    {
+        x *= 2;
+    }
+}
+
+
+
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -42,6 +56,17 @@ int main()
     swapElements(arr, 0, 1);
     std::cout << "После обмена: ";
     printArray(arr);
+
+
+
+
+    std::cout << std::endl;
+    multiplyByTwo(arr);
+    std::cout << "Результат после умножения на 2: ";
+    printArray(arr);
+
+
+
 
     return 0;
 
