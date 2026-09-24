@@ -18,6 +18,7 @@ int** allocateMatrix(int rows, int cols)
     {
         matrix[row] = new int[cols]{};
     }
+    
 
     return matrix;
 }
