@@ -18,7 +18,7 @@ int** allocateMatrix(int rows, int cols)
     {
         matrix[row] = new int[cols]{};
     }
-    
+
 
     return matrix;
 }
@@ -45,6 +45,53 @@ void fillMatrix(int** matrix, int rows, int cols)
     }
 }
 
+void printMatrix(int** matrix, int rows, int cols, bool showBorders = true, string title = "Matrix")
+{
+    cout << title << '\n';
+
+    const int cellWidth = 3; /// Ширина одной ячейки: пробел + цифра + пробел
+
+    if (showBorders)
+    {
+
+        const int borderLen = 1 + cols * cellWidth; /// Длина верхней и нижней горизонтальной линии
+
+        for (int symbol{}; symbol < borderLen; symbol++) // Верхняя граница
+            cout << '*';
+        cout << '\n';
+
+        for (int row{}; row < rows; row++) // Строки с числами
+        {
+            cout << '*';
+            for (int col{}; col < cols; col++)
+            {
+                cout << ' ' << matrix[row][col];
+
+                int digits = to_string(matrix[row][col]).size(); // Добиваем пробелами до ширины ячейки
+                for (int s{}; s < cellWidth - digits - 1; s++)
+                    cout << ' ';
+            }
+            cout << "*\n";
+        }
+
+        for (int symbol{}; symbol < borderLen; symbol++) // Нижняя граница
+            cout << '*';
+        cout << '\n';
+    }
+    else
+    {
+        for (int row{}; row < rows; row++)
+        {
+            for (int col{}; col < cols; col++)
+            {
+                cout << matrix[row][col] << ' ';
+            }
+            cout << '\n';
+        }
+    }
+}
+
+
 /**
  * @brief Выполняет программу.
  * @return 0 при успешном завершении.
@@ -66,6 +113,12 @@ int main()
 
     int** matrix {allocateMatrix(rows, cols)};
     fillMatrix(matrix, rows, cols);
+
+    printMatrix(matrix, rows, cols);
+
+    printMatrix(matrix, rows, cols, true, "\n Оценки");
+
+    printMatrix(matrix, rows, cols, false, "\n без рамки");
 
     return 0;
 }
