@@ -59,7 +59,6 @@ int& getElement(SafeArray& arr, int index)
 
 
 
-
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -71,6 +70,7 @@ int main()
     cin >> size;
     
     SafeArray myArr = createArray(size);
+    getElement(myArr, 2) = 999; //myArr.data[2] = 999;возвращает ссылку
     
     return 0;
 }
