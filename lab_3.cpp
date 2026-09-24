@@ -33,6 +33,33 @@ SafeArray createArray(int size)
     return arr;
 }
 
+/**
+ * @brief Возвращает ссылку на элемент массива.
+ * @param arr Массив SafeArray.
+ * @param index Индекс элемента.
+ * @return Ссылка на элемент массива или на переменную-заглушку.
+ */
+
+int& getElement(SafeArray& arr, int index)
+{
+    static int errorValue = 0;
+
+    if (index < 0 || index >= arr.size) //фун возв ссылку даже если индекс неверный. при прав инд возвр ссылку на эл массива
+    {
+        cout << "Ошибка: индекс вне границ массива\n";
+        return errorValue;
+    }
+
+    return arr.data[index];
+}
+
+
+
+
+
+
+
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
