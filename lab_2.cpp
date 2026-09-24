@@ -30,7 +30,7 @@ void printArray(int* arr, int size){
 
 
 /**
- * @brief Функция ищет первое отрицательное число
+ * @brief Функция ищет первое отрицательное число и выводит новый массив без него
  * @param arr Указатель на массив
  * @param size размер массива
  */
@@ -68,14 +68,27 @@ int main()
     int n;
     cout << "Введите размер массива N ";
     cin >> n;
-    int* arr = new int[n];
+    int* arr = new int[n]{}; //выделяем память для арр массива
     fillArray(arr,n);
     cout << endl;
     process(arr, n);
+    
+    cout << "Результат: ";
+
+
     printArray(arr, n);
 
-    delete[] arr;
-    arr = nullptr;
+    delete[] arr; //удаляем память для арр массива
+    arr = nullptr; //у арр нулевой указатель то есть нет адреса
+    if (arr != nullptr) //проверяем нулквой ли указатель то есь отсуствует ли он
+    {
+        cout << *arr << '\n';
+    }
+    else
+    {
+        cout << endl;
+        cout << "Указатель равен nullptr, доступ к памяти невозможен\n";
+    }
 
     return 0;
 
