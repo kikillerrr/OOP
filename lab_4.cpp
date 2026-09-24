@@ -45,6 +45,13 @@ void fillMatrix(int** matrix, int rows, int cols)
     }
 }
 
+/**
+ * @brief Освобождает память, занятую двумерным массивом
+ * @details Сначала освобождается память каждой вложенной строки затем — массива указателей
+ * @param matrix Указатель на двумерный динамический массив
+ * @param rows Количество строк массива
+ */
+
 void printMatrix(int** matrix, int rows, int cols, bool showBorders = true, string title = "Matrix")
 {
     cout << title << '\n';
@@ -92,10 +99,25 @@ void printMatrix(int** matrix, int rows, int cols, bool showBorders = true, stri
 }
 
 
+void freeMatrix(int** matrix, int rows)
+{
+    for (int row{}; row < rows; row++)
+    {
+        delete[] matrix[row];
+    }
+    delete[] matrix;
+}
+
+
+
 /**
- * @brief Выполняет программу.
- * @return 0 при успешном завершении.
+ * @brief Выполняет программу
+ * @details Функция запрашивает размер массива, создаёт SafeArray, заполняет
+ * его, выводит, демонстрирует безопасный доступ к элементу через
+ * getElement, изменяет размер массива и освобождает память
+ * @return 0 при успешном завершении
  */
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -119,6 +141,10 @@ int main()
     printMatrix(matrix, rows, cols, true, "\n Оценки");
 
     printMatrix(matrix, rows, cols, false, "\n без рамки");
+
+    freeMatrix(matrix, rows);
+    matrix = nullptr;
+
 
     return 0;
 }
