@@ -54,7 +54,20 @@ int& getElement(SafeArray& arr, int index)
 }
 
 
+/**
+ * @brief Выводит элементы безопасного массива.
+ * @param arr Константная ссылка на SafeArray.
+ */
 
+void printSafe(const SafeArray& arr)
+{
+    for (int i = 0; i < arr.size; i++)
+    {
+        cout << arr.data[i] << ' ';
+    }
+
+    cout << '\n';
+}
 
 
 
@@ -70,7 +83,11 @@ int main()
     cin >> size;
     
     SafeArray myArr = createArray(size);
+
     getElement(myArr, 2) = 999; //myArr.data[2] = 999;возвращает ссылку
+    
+    cout << "Массив: ";
+    printSafe(myArr);
     
     return 0;
 }
