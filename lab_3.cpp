@@ -69,6 +69,40 @@ void printSafe(const SafeArray& arr)
     cout << '\n';
 }
 
+/**
+ * @brief Изменяет размер динамического массива.
+ * @param arr Массив SafeArray, размер которого нужно изменить.
+ * @param M Новый размер массива.
+ */
+
+void reSizeArray(SafeArray& arr, int M)
+{
+    if (M < arr.size) //типо если новый размео меньше старого то выводим сначла эл которые будуь удалены.
+    {
+        cout << "Удаленные элементы: ";
+
+        for (int i = M; i < arr.size; i++)
+        {
+            cout << arr.data[i] << ' ';
+        }
+
+        cout << '\n';
+    }
+
+    int* newData = new int[M]{}; //если новый размер болььше создаем . автоматически делает новые эл =0
+
+    int limit = (arr.size < M) ? arr.size : M;
+
+    for (int i = 0; i < limit; i++) //копируем старые эл
+    {
+        newData[i] = arr.data[i];
+    }
+
+    delete[] arr.data; // старя память освобождаетсяяя
+
+    arr.data = newData;  //указатель начинает указывать на новый массив
+    arr.size = M;
+}
 
 
 
@@ -88,7 +122,19 @@ int main()
     
     cout << "Массив: ";
     printSafe(myArr);
+
+    int newSize{};
+    cout << "Введите новый размер массива: ";
+    cin >> newSize;
+
+    reSizeArray(myArr, newSize);
+
+    cout << "Массив после изменения размера: ";
+    printSafe(myArr);
     
+
+    delete[] myArr.data;
     return 0;
+
 }
 
