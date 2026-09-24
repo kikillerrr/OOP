@@ -34,11 +34,26 @@ void printArray(int* arr, int size){
  * @param arr Указатель на массив
  * @param size размер массива
  */
-void process(int*& arr,int size){
-    for (int i = 0; i < size; i++){
-        if (arr [i] < 0){
-            cout << "Первое отрицательное число" << arr[i] << endl;
+void process(int*& arr, int& size) {
+    int index = -1;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < 0) {
+            index = i;
+            break;
         }
+    }
+
+    if (index != -1) {
+        int* newarr = new int[index];
+
+        for (int i = 0; i < index; i++) {
+            newarr[i] = arr[i];
+        }
+
+        delete[] arr;
+
+        arr = newarr;
+        size = index;
     }
 }
 
@@ -48,14 +63,22 @@ void process(int*& arr,int size){
  */ 
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     int n;
     cout << "Введите размер массива N ";
     cin >> n;
     int* arr = new int[n];
     fillArray(arr,n);
-    printArray(arr, n);
     cout << endl;
     process(arr, n);
+    printArray(arr, n);
+
+    delete[] arr;
+    arr = nullptr;
+
+    return 0;
+
 
 
 }
